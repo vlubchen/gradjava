@@ -16,4 +16,24 @@
         <url-pattern>/users</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>dishesServlet</servlet-name>
+        <servlet-class>ru.vlubchen.gradjava.web.DishesServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dishesServlet</servlet-name>
+        <url-pattern>/dishes</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>restaurantsServlet</servlet-name>
+        <servlet-class>ru.vlubchen.gradjava.web.RestaurantsServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>restaurantsServlet</servlet-name>
+        <url-pattern>/restaurants</url-pattern>
+    </servlet-mapping>
+
 </web-app>

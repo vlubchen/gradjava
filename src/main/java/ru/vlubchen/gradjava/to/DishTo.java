@@ -6,32 +6,44 @@ import java.time.LocalDate;
 
 public class DishTo {
 
-    private final LocalDate date;
-
-    private final String name;
+    private final LocalDate dateOfLunch;
 
     private final Restaurant restaurant;
 
+    private final String nameOfDish;
+
     private final int price;
 
-    private final int votes;
-
-    public DishTo(LocalDate date, String name, Restaurant restaurant, int price, int votes) {
-        this.date = date;
-        this.name = name;
+    public DishTo(LocalDate dateOfLunch, Restaurant restaurant, String nameOfDish, int price) {
+        this.dateOfLunch = dateOfLunch;
         this.restaurant = restaurant;
+        this.nameOfDish = nameOfDish;
         this.price = price;
-        this.votes = votes;
     }
 
     @Override
     public String toString() {
         return "DishTo{" +
-                "date=" + date +
-                ", name='" + name + '\'' +
+                "date=" + dateOfLunch +
                 ", restaurant='" + restaurant + '\'' +
+                ", name='" + nameOfDish + '\'' +
                 ", price=" + price +
-                ", votes=" + votes +
                 '}';
+    }
+
+    public LocalDate getDateOfLunch() {
+        return dateOfLunch;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public String getNameOfDish() {
+        return nameOfDish;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

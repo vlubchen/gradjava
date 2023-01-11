@@ -4,34 +4,35 @@ import java.time.LocalDate;
 
 public class Dish {
 
-    private final LocalDate date;
-
-    private final String name;
+    private final LocalDate dateOfLunch;
 
     private final Restaurant restaurant;
 
+    private final String nameOfDish;
+
     private final int price;
 
-    public Dish(LocalDate date, String name, Restaurant restaurant, int price) {
-        this.date = date;
-        this.name = name;
+    public Dish(LocalDate dateOfLunch, Restaurant restaurant, String nameOfDish, int price) {
+        this.dateOfLunch = dateOfLunch;
         this.restaurant = restaurant;
+        this.nameOfDish = nameOfDish;
         this.price = price;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getDateOfLunch() {
+        return dateOfLunch;
     }
 
-    public String getName() {
-        return name;
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public String getNameOfDish() {
+        return nameOfDish;
     }
 
     public int getPrice() {
         return price;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
 }
