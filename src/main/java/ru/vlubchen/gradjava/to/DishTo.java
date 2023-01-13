@@ -5,6 +5,7 @@ import ru.vlubchen.gradjava.model.Restaurant;
 import java.time.LocalDate;
 
 public class DishTo {
+    private final Integer id;
 
     private final LocalDate dateOfLunch;
 
@@ -14,17 +15,23 @@ public class DishTo {
 
     private final int price;
 
-    public DishTo(LocalDate dateOfLunch, Restaurant restaurant, String nameOfDish, int price) {
+    public DishTo(Integer id, LocalDate dateOfLunch, Restaurant restaurant, String nameOfDish, int price) {
+        this.id = id;
         this.dateOfLunch = dateOfLunch;
         this.restaurant = restaurant;
         this.nameOfDish = nameOfDish;
         this.price = price;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "DishTo{" +
-                "date=" + dateOfLunch +
+                "id=" + id +
+                ", date=" + dateOfLunch +
                 ", restaurant='" + restaurant + '\'' +
                 ", name='" + nameOfDish + '\'' +
                 ", price=" + price +

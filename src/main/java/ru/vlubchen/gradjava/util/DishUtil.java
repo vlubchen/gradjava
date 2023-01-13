@@ -33,7 +33,7 @@ public class DishUtil {
     public static List<DishTo> getDishesTo(List<Dish> dishes, LocalDate date) {
         return dishes.stream()
                 .filter(dish -> date.isEqual(dish.getDateOfLunch()))
-                .map(dish -> new DishTo(dish.getDateOfLunch(), dish.getRestaurant(), dish.getNameOfDish(),  dish.getPrice()))
+                .map(dish -> new DishTo(dish.getId(), dish.getDateOfLunch(), dish.getRestaurant(), dish.getNameOfDish(),  dish.getPrice()))
                 .collect(Collectors.toList());
     }
 }
