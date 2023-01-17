@@ -7,7 +7,9 @@ import ru.vlubchen.gradjava.to.DishTo;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class DishUtil {
@@ -30,10 +32,18 @@ public class DishUtil {
             new Dish(LocalDate.of(2023, Month.JANUARY, 10), Restaurant.Sholly, "Чай", 50)
     );
 
-    public static List<DishTo> getDishesTo(List<Dish> dishes, LocalDate date) {
+    public static List<DishTo> getDishesTo(Collection<Dish> dishes) {
+        return filterByPredicate(dishes, dish -> true);
+    }
+
+    public static List<DishTo> getFilteredDishesTo(Collection<Dish> meals, LocalDate dateOfLunch) {
+        return filterByPredicate(dishes, dish -> dateOfLunch.isEqual(dish.getDateOfLunch()));
+    }
+
+    public static List<DishTo> filterByPredicate(Collection<Dish> dishes, Predicate<Dish> filter) {
         return dishes.stream()
-                .filter(dish -> date.isEqual(dish.getDateOfLunch()))
-                .map(dish -> new DishTo(dish.getId(), dish.getDateOfLunch(), dish.getRestaurant(), dish.getNameOfDish(),  dish.getPrice()))
+                .filter(filter)
+                .map(dish -> new DishTo(dish.getId(), dish.getDateOfLunch(), dish.getRestaurant(), dish.getNameOfDish(), dish.getPrice()))
                 .collect(Collectors.toList());
     }
 }
