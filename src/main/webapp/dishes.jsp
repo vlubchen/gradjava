@@ -42,7 +42,7 @@
         <tr style="color: green">
             <td>${dish.dateOfLunch}</td>
             <td>${dish.restaurant}</td>
-            <td>${dish.nameOfDish}</td>
+            <td>${dish.name}</td>
             <td>${dish.price}</td>
             <td><a href="dishes?action=update&id=${dish.id}">Update</a></td>
             <td><a href="dishes?action=delete&id=${dish.id}">Delete</a></td>

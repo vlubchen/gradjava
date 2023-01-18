@@ -11,15 +11,15 @@ public class DishTo {
 
     private final Restaurant restaurant;
 
-    private final String nameOfDish;
+    private final String name;
 
     private final int price;
 
-    public DishTo(Integer id, LocalDate dateOfLunch, Restaurant restaurant, String nameOfDish, int price) {
+    public DishTo(Integer id, LocalDate dateOfLunch, Restaurant restaurant, String name, int price) {
         this.id = id;
         this.dateOfLunch = dateOfLunch;
         this.restaurant = restaurant;
-        this.nameOfDish = nameOfDish;
+        this.name = name;
         this.price = price;
     }
 
@@ -33,7 +33,7 @@ public class DishTo {
                 "id=" + id +
                 ", date=" + dateOfLunch +
                 ", restaurant='" + restaurant + '\'' +
-                ", name='" + nameOfDish + '\'' +
+                ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';
     }
@@ -46,8 +46,8 @@ public class DishTo {
         return restaurant;
     }
 
-    public String getNameOfDish() {
-        return nameOfDish;
+    public String getName() {
+        return name;
     }
 
     public int getPrice() {

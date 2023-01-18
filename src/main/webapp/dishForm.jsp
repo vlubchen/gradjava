@@ -41,7 +41,7 @@
         </dl>
         <dl>
             <dt>Description:</dt>
-            <dd><input type="text" value="${dish.nameOfDish}" size=40 name="nameOfDish" required></dd>
+            <dd><input type="text" value="${dish.name}" size=40 name="nameOfDish" required></dd>
         </dl>
         <dl>
             <dt>Price:</dt>

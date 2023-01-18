@@ -43,7 +43,7 @@ public class DishUtil {
     public static List<DishTo> filterByPredicate(Collection<Dish> dishes, Predicate<Dish> filter) {
         return dishes.stream()
                 .filter(filter)
-                .map(dish -> new DishTo(dish.getId(), dish.getDateOfLunch(), dish.getRestaurant(), dish.getNameOfDish(), dish.getPrice()))
+                .map(dish -> new DishTo(dish.getId(), dish.getDateOfLunch(), dish.getRestaurant(), dish.getName(), dish.getPrice()))
                 .collect(Collectors.toList());
     }
 }

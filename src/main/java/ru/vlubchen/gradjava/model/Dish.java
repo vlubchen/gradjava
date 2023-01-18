@@ -9,12 +9,12 @@ public class Dish {
 
     private final Restaurant restaurant;
 
-    private final String nameOfDish;
+    private final String name;
 
     private final int price;
 
-    public Dish(LocalDate dateOfLunch, Restaurant restaurant, String nameOfDish, int price) {
-        this(null, dateOfLunch, restaurant, nameOfDish, price);
+    public Dish(LocalDate dateOfLunch, Restaurant restaurant, String name, int price) {
+        this(null, dateOfLunch, restaurant, name, price);
     }
 
     public void setId(Integer id) {
@@ -25,11 +25,11 @@ public class Dish {
         return id;
     }
 
-    public Dish(Integer id, LocalDate dateOfLunch, Restaurant restaurant, String nameOfDish, int price) {
+    public Dish(Integer id, LocalDate dateOfLunch, Restaurant restaurant, String name, int price) {
         this.id = id;
         this.dateOfLunch = dateOfLunch;
         this.restaurant = restaurant;
-        this.nameOfDish = nameOfDish;
+        this.name = name;
         this.price = price;
     }
 
@@ -41,8 +41,8 @@ public class Dish {
         return restaurant;
     }
 
-    public String getNameOfDish() {
-        return nameOfDish;
+    public String getName() {
+        return name;
     }
 
     public int getPrice() {
