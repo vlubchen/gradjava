@@ -33,7 +33,7 @@
         <input type="hidden" name="id" value="${dish.id}">
         <dl>
             <dt>Date:</dt>
-            <dd><input type="date" value="${dish.dateOfLunch}" name="dateOfLunch" required></dd>
+            <dd><input type="date" value="${dish.day}" name="dateOfLunch" required></dd>
         </dl>
         <dl>
             <dt>Restaurant:</dt>

@@ -37,13 +37,13 @@ public class DishUtil {
     }
 
     public static List<DishTo> getFilteredDishesTo(Collection<Dish> meals, LocalDate dateOfLunch) {
-        return filterByPredicate(dishes, dish -> dateOfLunch.isEqual(dish.getDateOfLunch()));
+        return filterByPredicate(dishes, dish -> dateOfLunch.isEqual(dish.getDay()));
     }
 
     public static List<DishTo> filterByPredicate(Collection<Dish> dishes, Predicate<Dish> filter) {
         return dishes.stream()
                 .filter(filter)
-                .map(dish -> new DishTo(dish.getId(), dish.getDateOfLunch(), dish.getRestaurant(), dish.getName(), dish.getPrice()))
+                .map(dish -> new DishTo(dish.getId(), dish.getDay(), dish.getRestaurant(), dish.getName(), dish.getPrice()))
                 .collect(Collectors.toList());
     }
 }

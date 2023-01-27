@@ -32,9 +32,9 @@ public class DishesServlet extends HttpServlet {
         String id = request.getParameter("id");
 
         Dish dish = new Dish(id.isEmpty() ? null : Integer.valueOf(id),
-                LocalDate.parse(request.getParameter("dateOfLunch")),
+                LocalDate.parse(request.getParameter("day")),
                 Restaurant.valueOf(request.getParameter("restaurant")),
-                request.getParameter("nameOfDish"),
+                request.getParameter("name"),
                 Integer.parseInt(request.getParameter("price")));
 
         log.info(dish.isNew() ? "Create {}" : "Update {}", dish);
