@@ -32,12 +32,12 @@ public class DishUtil {
             new Dish(LocalDate.of(2023, Month.JANUARY, 10), Restaurant.Sholly, "Чай", 50)
     );
 
-    public static List<DishTo> getDishesTo(Collection<Dish> dishes) {
+    public static List<DishTo> getDishesTo(List<Dish> dishes) {
         return filterByPredicate(dishes, dish -> true);
     }
 
-    public static List<DishTo> getFilteredDishesTo(Collection<Dish> meals, LocalDate dateOfLunch) {
-        return filterByPredicate(dishes, dish -> dateOfLunch.isEqual(dish.getDay()));
+    public static List<DishTo> getFilteredDishesTo(List<Dish> dishes, LocalDate day) {
+        return filterByPredicate(dishes, dish -> day.isEqual(dish.getDay()));
     }
 
     public static List<DishTo> filterByPredicate(Collection<Dish> dishes, Predicate<Dish> filter) {

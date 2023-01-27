@@ -2,7 +2,8 @@ package ru.vlubchen.gradjava.repository;
 
 import ru.vlubchen.gradjava.model.Dish;
 
-import java.util.Collection;
+import java.time.LocalDate;
+import java.util.List;
 
 public interface DishRepository {
     // null if not found, when updated
@@ -14,5 +15,9 @@ public interface DishRepository {
     // null if not found
     Dish get(int id);
 
-    Collection<Dish> getAll();
+    // ORDERED date desc
+    List<Dish> getAll();
+
+    // ORDERED date desc
+    List<Dish> getByDay(LocalDate day);
 }

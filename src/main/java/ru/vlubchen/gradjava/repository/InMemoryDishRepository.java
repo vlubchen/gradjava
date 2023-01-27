@@ -3,14 +3,17 @@ package ru.vlubchen.gradjava.repository;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.util.DishUtil;
 
-import java.util.Collection;
+import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class InMemoryDishRepository implements DishRepository {
 
-    private final Map<Integer, Dish> repository = new ConcurrentHashMap<>();
+    private final Map<Integer, Dish> dishes = new ConcurrentHashMap<>();
 
     private final AtomicInteger counter = new AtomicInteger(0);
 
@@ -22,24 +25,34 @@ public class InMemoryDishRepository implements DishRepository {
     public Dish save(Dish dish) {
         if (dish.isNew()) {
             dish.setId(counter.incrementAndGet());
-            repository.put(dish.getId(), dish);
+            dishes.put(dish.getId(), dish);
             return dish;
         }
-        return repository.computeIfPresent(dish.getId(), (id, oldDish) -> dish);
+        return dishes.computeIfPresent(dish.getId(), (id, oldDish) -> dish);
     }
 
     @Override
     public boolean delete(int id) {
-        return repository.remove(id) != null;
+        return dishes.remove(id) != null;
     }
 
     @Override
     public Dish get(int id) {
-        return repository.get(id);
+        return dishes.get(id);
     }
 
     @Override
-    public Collection<Dish> getAll() {
-        return repository.values();
+    public List<Dish> getAll() {
+        return dishes.values().stream()
+                .sorted(Comparator.comparing(Dish::getDay).reversed())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Dish> getByDay(LocalDate day) {
+        return dishes.values().stream()
+                .filter(dish -> day.isEqual(dish.getDay()))
+                .sorted(Comparator.comparing(Dish::getDay).reversed())
+                .collect(Collectors.toList());
     }
 }
