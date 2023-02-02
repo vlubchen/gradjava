@@ -8,9 +8,9 @@ public class User extends AbstractNamedEntity {
     private String password;
     private boolean enabled = true;
     private Date registered = new Date();
-    private Set<Role> roles;
+    private Role roles;
 
-    public User(Integer id, String name, String email, String password, boolean enabled, Date registered, Set<Role> roles) {
+    public User(Integer id, String name, String email, String password, boolean enabled, Date registered, Role roles) {
         super(id, name);
         this.email = email;
         this.password = password;
@@ -51,11 +51,11 @@ public class User extends AbstractNamedEntity {
         this.registered = registered;
     }
 
-    public Set<Role> getRoles() {
+    public Role getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Role roles) {
         this.roles = roles;
     }
 

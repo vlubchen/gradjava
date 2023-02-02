@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.model.Restaurant;
 import ru.vlubchen.gradjava.repository.DishRepository;
-import ru.vlubchen.gradjava.repository.InMemoryDishRepository;
+import ru.vlubchen.gradjava.repository.inmemory.InMemoryDishRepository;
 import ru.vlubchen.gradjava.util.DishUtil;
 
 import javax.servlet.ServletException;

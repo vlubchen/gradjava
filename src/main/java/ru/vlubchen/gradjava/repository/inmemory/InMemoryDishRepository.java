@@ -1,6 +1,7 @@
-package ru.vlubchen.gradjava.repository;
+package ru.vlubchen.gradjava.repository.inmemory;
 
 import ru.vlubchen.gradjava.model.Dish;
+import ru.vlubchen.gradjava.repository.DishRepository;
 import ru.vlubchen.gradjava.util.DishUtil;
 
 import java.time.LocalDate;

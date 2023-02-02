@@ -1,6 +1,7 @@
-package ru.vlubchen.gradjava.repository;
+package ru.vlubchen.gradjava.repository.inmemory;
 
 import ru.vlubchen.gradjava.model.User;
+import ru.vlubchen.gradjava.repository.UserRepository;
 
 import java.util.Comparator;
 import java.util.List;

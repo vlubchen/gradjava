@@ -48,4 +48,12 @@ public abstract class AbstractUserController {
         log.info("getByEmail {}", email);
         return checkNotFound(repository.getByEmail(email), "email=" + email);
     }
+
+    public UserRepository getRepository() {
+        return repository;
+    }
+
+    public void setRepository(UserRepository repository) {
+        this.repository = repository;
+    }
 }
