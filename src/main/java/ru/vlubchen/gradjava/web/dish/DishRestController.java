@@ -11,8 +11,12 @@ import java.util.List;
 import static ru.vlubchen.gradjava.util.ValidationUtil.*;
 
 public class DishRestController {
-    private DishRepository repository;
+    private final DishRepository repository;
     protected final Logger log = LoggerFactory.getLogger(getClass());
+
+    public DishRestController(DishRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Dish> getAll() {
         log.info("getAll");

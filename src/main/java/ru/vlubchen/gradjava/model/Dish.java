@@ -4,22 +4,14 @@ import java.time.LocalDate;
 
 public class Dish extends AbstractNamedEntity {
 
-    private final LocalDate day;
+    private LocalDate day;
 
-    private final Restaurant restaurant;
+    private Restaurant restaurant;
 
-    private final int price;
+    private int price;
 
     public Dish(LocalDate day, Restaurant restaurant, String name, int price) {
         this(null, day, restaurant, name, price);
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public Dish(Integer id, LocalDate day, Restaurant restaurant, String name, int price) {
@@ -38,11 +30,30 @@ public class Dish extends AbstractNamedEntity {
         return restaurant;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public int getPrice() {
         return price;
+    }
+
+    public void setDay(LocalDate day) {
+        this.day = day;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                ", id=" + id +
+                "day=" + day +
+                ", restaurant=" + restaurant +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
