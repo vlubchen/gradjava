@@ -1,5 +1,6 @@
 package ru.vlubchen.gradjava.repository.inmemory;
 
+import org.springframework.stereotype.Repository;
 import ru.vlubchen.gradjava.model.User;
 import ru.vlubchen.gradjava.repository.UserRepository;
 
@@ -10,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+@Repository
 public class InMemoryUserRepository implements UserRepository {
 
     public static final int USER_ID = 1;

@@ -1,9 +1,11 @@
 package ru.vlubchen.gradjava.web.user;
 
+import org.springframework.stereotype.Controller;
 import ru.vlubchen.gradjava.model.User;
 
 import java.util.List;
 
+@Controller
 public class AdminRestController extends AbstractUserController {
     @Override
     public List<User> getAll() {

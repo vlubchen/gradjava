@@ -1,9 +1,11 @@
 package ru.vlubchen.gradjava.web.user;
 
+import org.springframework.stereotype.Controller;
 import ru.vlubchen.gradjava.model.User;
 
 import static ru.vlubchen.gradjava.web.SecurityUtil.authUserId;
 
+@Controller
 public class ProfileRestController extends AbstractUserController {
 
     public User get() {

@@ -1,5 +1,6 @@
 package ru.vlubchen.gradjava.repository.inmemory;
 
+import org.springframework.stereotype.Repository;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.repository.DishRepository;
 import ru.vlubchen.gradjava.util.DishUtil;
@@ -12,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+@Repository
 public class InMemoryDishRepository implements DishRepository {
 
     private final Map<Integer, Dish> dishes = new ConcurrentHashMap<>();

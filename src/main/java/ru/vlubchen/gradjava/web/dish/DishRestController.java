@@ -2,6 +2,7 @@ package ru.vlubchen.gradjava.web.dish;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.repository.DishRepository;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 import static ru.vlubchen.gradjava.util.ValidationUtil.*;
 
+@Controller
 public class DishRestController {
     private final DishRepository repository;
     protected final Logger log = LoggerFactory.getLogger(getClass());

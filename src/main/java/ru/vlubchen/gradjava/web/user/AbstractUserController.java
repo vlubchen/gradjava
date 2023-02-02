@@ -2,6 +2,7 @@ package ru.vlubchen.gradjava.web.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.vlubchen.gradjava.model.User;
 import ru.vlubchen.gradjava.repository.UserRepository;
 
@@ -14,7 +15,7 @@ import static ru.vlubchen.gradjava.util.ValidationUtil.checkNotFoundWithId;
 
 public abstract class AbstractUserController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
-
+    @Autowired
     private UserRepository repository;
 
     public List<User> getAll() {
