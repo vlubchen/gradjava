@@ -1,12 +1,12 @@
 package ru.vlubchen.gradjava.web;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.util.StringUtils;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.model.Restaurant;
-import ru.vlubchen.gradjava.repository.DishRepository;
-import ru.vlubchen.gradjava.repository.inmemory.InMemoryDishRepository;
 import ru.vlubchen.gradjava.util.DishUtil;
+import ru.vlubchen.gradjava.web.dish.DishRestController;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,28 +17,37 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class DishesServlet extends HttpServlet {
-    private static final Logger log = LoggerFactory.getLogger(DishesServlet.class);
 
-    private DishRepository repository;
+    private ConfigurableApplicationContext springContext;
+    private DishRestController dishController;
 
     @Override
     public void init() {
-        repository = new InMemoryDishRepository();
+        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        dishController = springContext.getBean(DishRestController.class);
+    }
+
+    @Override
+    public void destroy() {
+        springContext.close();
+        super.destroy();
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String id = request.getParameter("id");
 
-        Dish dish = new Dish(id.isEmpty() ? null : Integer.valueOf(id),
+        Dish dish = new Dish(
                 LocalDate.parse(request.getParameter("day")),
                 Restaurant.valueOf(request.getParameter("restaurant")),
                 request.getParameter("name"),
                 Integer.parseInt(request.getParameter("price")));
 
-        log.info(dish.isNew() ? "Create {}" : "Update {}", dish);
-        repository.save(dish);
+        if (StringUtils.hasLength(request.getParameter("id"))) {
+            dishController.update(dish, getId(request));
+        } else {
+            dishController.create(dish);
+        }
         response.sendRedirect("dishes");
     }
 
@@ -49,23 +58,21 @@ public class DishesServlet extends HttpServlet {
         switch (action == null ? "all" : action) {
             case "delete":
                 int id = getId(request);
-                log.info("Delete id={}", id);
-                repository.delete(id);
+                dishController.delete(id);
                 response.sendRedirect("dishes");
                 break;
             case "create":
             case "update":
                 final Dish dish = "create".equals(action) ?
                         new Dish(LocalDate.now(), Restaurant.BeerHouse, "Новое блюдо", 0) :
-                        repository.get(getId(request));
+                        dishController.get(getId(request));
                 request.setAttribute("dish", dish);
                 request.getRequestDispatcher("/dishForm.jsp").forward(request, response);
                 break;
             case "all":
             default:
-                log.info("getAll");
                 request.setAttribute("dishes",
-                        DishUtil.getDishesTo(repository.getAll()));
+                        DishUtil.getDishesTo(dishController.getAll()));
                 request.getRequestDispatcher("/dishes.jsp").forward(request, response);
                 break;
         }
