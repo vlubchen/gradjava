@@ -24,6 +24,13 @@
 <h3><a href="index.html">Home</a></h3>
 <hr>
 <h2>Dishes</h2>
+<form method="get" action="dishes">
+    <input type="hidden" name="action" value="filter">
+    <label>Choose date:</label>
+    <input type="date" name="day" value="${param.day}">
+    <button type="submit">Filter</button>
+</form>
+<hr/>
 <a href="dishes?action=create">Add Dish</a>
 <br><br>
 <table>

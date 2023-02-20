@@ -5,7 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StringUtils;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.model.Restaurant;
-import ru.vlubchen.gradjava.util.DishUtil;
+import ru.vlubchen.gradjava.util.DateTimeUtil;
 import ru.vlubchen.gradjava.web.dish.DishRestController;
 
 import javax.servlet.ServletException;
@@ -69,10 +69,14 @@ public class DishesServlet extends HttpServlet {
                 request.setAttribute("dish", dish);
                 request.getRequestDispatcher("/dishForm.jsp").forward(request, response);
                 break;
+            case "filter":
+                LocalDate day = DateTimeUtil.parseLocalDate(request.getParameter("day"));
+                request.setAttribute("dishes", dishController.getByDay(day));
+                request.getRequestDispatcher("/dishes.jsp").forward(request, response);
+                break;
             case "all":
             default:
-                request.setAttribute("dishes",
-                        DishUtil.getDishesTo(dishController.getAll()));
+                request.setAttribute("dishes", dishController.getAll());
                 request.getRequestDispatcher("/dishes.jsp").forward(request, response);
                 break;
         }

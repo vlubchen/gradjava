@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Repository
@@ -46,15 +47,17 @@ public class InMemoryDishRepository implements DishRepository {
 
     @Override
     public List<Dish> getAll() {
-        return dishes.values().stream()
-                .sorted(Comparator.comparing(Dish::getDay).reversed())
-                .collect(Collectors.toList());
+        return filterByPredicate(dish -> true);
     }
 
     @Override
     public List<Dish> getByDay(LocalDate day) {
+        return day != null ? filterByPredicate(dish -> day.isEqual(dish.getDay())) : filterByPredicate(dish -> true);
+    }
+
+    private List<Dish> filterByPredicate(Predicate<Dish> filter) {
         return dishes.values().stream()
-                .filter(dish -> day.isEqual(dish.getDay()))
+                .filter(filter)
                 .sorted(Comparator.comparing(Dish::getDay).reversed())
                 .collect(Collectors.toList());
     }

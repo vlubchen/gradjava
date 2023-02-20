@@ -2,9 +2,12 @@ package ru.vlubchen.gradjava.web.dish;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.repository.DishRepository;
+import ru.vlubchen.gradjava.to.DishTo;
+import ru.vlubchen.gradjava.util.DishUtil;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,9 +23,9 @@ public class DishRestController {
         this.repository = repository;
     }
 
-    public List<Dish> getAll() {
+    public List<DishTo> getAll() {
         log.info("getAll");
-        return repository.getAll();
+        return DishUtil.getDishesTo(repository.getAll());
     }
 
     public Dish get(int id) {
@@ -47,8 +50,9 @@ public class DishRestController {
         checkNotFoundWithId(repository.save(dish), dish.getId());
     }
 
-    public List<Dish> getByDay(LocalDate day) {
-        log.info("getByEmail {}", day);
-        return checkNotFound(repository.getByDay(day), "day=" + day);
+    public List<DishTo> getByDay(@Nullable LocalDate day) {
+        log.info("getByDay {}", day);
+        List<Dish> dishesDateFiltered = repository.getByDay(day);
+        return DishUtil.getFilteredDishesTo(dishesDateFiltered, day);
     }
 }

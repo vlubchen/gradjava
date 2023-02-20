@@ -37,7 +37,8 @@ public class DishUtil {
     }
 
     public static List<DishTo> getFilteredDishesTo(List<Dish> dishes, LocalDate day) {
-        return filterByPredicate(dishes, dish -> day.isEqual(dish.getDay()));
+        return day != null ? filterByPredicate(dishes, dish -> day.isEqual(dish.getDay())):
+                filterByPredicate(dishes, dish -> true);
     }
 
     public static List<DishTo> filterByPredicate(Collection<Dish> dishes, Predicate<Dish> filter) {
