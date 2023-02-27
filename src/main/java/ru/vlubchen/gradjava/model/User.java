@@ -1,22 +1,27 @@
 package ru.vlubchen.gradjava.model;
 
-import java.util.Date;
-import java.util.Set;
+import org.springframework.util.CollectionUtils;
+
+import java.util.*;
 
 public class User extends AbstractNamedEntity {
     private String email;
     private String password;
     private boolean enabled = true;
     private Date registered = new Date();
-    private Role roles;
+    private Set<Role> roles;
 
-    public User(Integer id, String name, String email, String password, boolean enabled, Date registered, Role roles) {
+    public User(Integer id, String name, String email, String password, boolean enabled, Date registered, Collection<Role> roles) {
         super(id, name);
         this.email = email;
         this.password = password;
         this.enabled = enabled;
         this.registered = registered;
-        this.roles = roles;
+        setRoles(roles);
+    }
+
+    public User(Integer id, String name, String email, String password, Role... roles) {
+        this(id, name, email, password, true, new Date(), Arrays.asList((roles)));
     }
 
     public String getEmail() {
@@ -51,12 +56,12 @@ public class User extends AbstractNamedEntity {
         this.registered = registered;
     }
 
-    public Role getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Role roles) {
-        this.roles = roles;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
 
     @Override

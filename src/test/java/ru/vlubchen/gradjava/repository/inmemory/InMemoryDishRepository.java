@@ -1,5 +1,7 @@
 package ru.vlubchen.gradjava.repository.inmemory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.repository.DishRepository;
@@ -16,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryDishRepository implements DishRepository {
-
+    private static final Logger log = LoggerFactory.getLogger(InMemoryDishRepository.class);
     private final Map<Integer, Dish> dishes = new ConcurrentHashMap<>();
 
     private final AtomicInteger counter = new AtomicInteger(0);

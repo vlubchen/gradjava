@@ -15,7 +15,6 @@ import ru.vlubchen.gradjava.web.user.ProfileRestController;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
-import java.util.Date;
 
 public class SpringMain {
     public static void main(String[] args) {
@@ -26,11 +25,9 @@ public class SpringMain {
         userRepository.getAll();
 
         AdminRestController adminRestController = appCtx.getBean(AdminRestController.class);
-        adminRestController.create(new User(null, "adminName", "admin@mail.ru", "admin",
-                true, new Date(), Role.ADMIN));
+        adminRestController.create(new User(null, "adminName", "admin@mail.ru", "admin", Role.ADMIN, Role.USER));
         ProfileRestController profileRestController = appCtx.getBean(ProfileRestController.class);
-        profileRestController.create(new User(null, "userName", "user@mail.ru", "user",
-                true, new Date(), Role.USER));
+        profileRestController.create(new User(null, "userName", "user@mail.ru", "user", Role.USER));
 
         DishRepository dishRepository = appCtx.getBean(DishRepository.class);
         DishRestController dishRestController = appCtx.getBean(DishRestController.class);
