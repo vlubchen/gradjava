@@ -3,6 +3,9 @@ package ru.vlubchen.gradjava.model;
 public abstract class AbstractNamedEntity extends AbstractBaseEntity {
     protected String name;
 
+    protected AbstractNamedEntity() {
+    }
+
     public AbstractNamedEntity(Integer id, String name) {
         super(id);
         this.name = name;
