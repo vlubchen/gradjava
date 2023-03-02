@@ -43,7 +43,7 @@ public class JdbcDishRepository implements DishRepository {
                 .addValue("name", dish.getName())
                 .addValue("day", dish.getDay())
                 .addValue("price", dish.getPrice())
-                .addValue("restaurant_id", dish.getRestaurant());
+                .addValue("restaurantId", dish.getRestaurant().getId());
 
         if (dish.isNew()) {
             Number newId = insertDish.executeAndReturnKey(map);
@@ -51,7 +51,7 @@ public class JdbcDishRepository implements DishRepository {
         } else {
             if (namedParameterJdbcTemplate.update("" +
                     "UPDATE dish " +
-                    "   SET name=:name, day=:day, price=:price " +
+                    "   SET name=:name, day=:day, price=:price, restaurant_id=:restaurantId" +
                     " WHERE id=:id", map) == 0) {
                 return null;
             }

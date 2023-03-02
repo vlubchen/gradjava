@@ -4,7 +4,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StringUtils;
 import ru.vlubchen.gradjava.model.Dish;
-import ru.vlubchen.gradjava.model.Restaurant;
 import ru.vlubchen.gradjava.util.DateTimeUtil;
 import ru.vlubchen.gradjava.web.dish.DishRestController;
 
@@ -15,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
+
+import static ru.vlubchen.gradjava.util.RestaurantUtil.restaurants;
 
 public class DishesServlet extends HttpServlet {
 
@@ -39,7 +40,7 @@ public class DishesServlet extends HttpServlet {
 
         Dish dish = new Dish(
                 LocalDate.parse(request.getParameter("day")),
-                Restaurant.valueOf(request.getParameter("restaurant")),
+                null,//request.getParameter("restaurant"),
                 request.getParameter("name"),
                 Integer.parseInt(request.getParameter("price")));
 
@@ -64,7 +65,7 @@ public class DishesServlet extends HttpServlet {
             case "create":
             case "update":
                 final Dish dish = "create".equals(action) ?
-                        new Dish(LocalDate.now(), Restaurant.BeerHouse, "Новое блюдо", 0) :
+                        new Dish(LocalDate.now(), restaurants.get(2), "Новое блюдо", 0) :
                         dishController.get(getId(request));
                 request.setAttribute("dish", dish);
                 request.getRequestDispatcher("/dishForm.jsp").forward(request, response);

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class DishTo {
     private final Integer id;
 
-    private final LocalDate dateOfLunch;
+    private final LocalDate day;
 
     private final Restaurant restaurant;
 
@@ -17,7 +17,7 @@ public class DishTo {
 
     public DishTo(Integer id, LocalDate dateOfLunch, Restaurant restaurant, String name, int price) {
         this.id = id;
-        this.dateOfLunch = dateOfLunch;
+        this.day = dateOfLunch;
         this.restaurant = restaurant;
         this.name = name;
         this.price = price;
@@ -31,15 +31,15 @@ public class DishTo {
     public String toString() {
         return "DishTo{" +
                 "id=" + id +
-                ", date=" + dateOfLunch +
+                ", date=" + day +
                 ", restaurant='" + restaurant + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';
     }
 
-    public LocalDate getDateOfLunch() {
-        return dateOfLunch;
+    public LocalDate getDay() {
+        return day;
     }
 
     public Restaurant getRestaurant() {

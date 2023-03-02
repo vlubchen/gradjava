@@ -45,7 +45,7 @@
         </dl>
         <dl>
             <dt>Price:</dt>
-            <dd><input type="price" value="${dish.price}" name="price" required></dd>
+            <dd><input type="text" value="${dish.price}" name="price" required></dd>
         </dl>
         <button type="submit">Save</button>
         <button onclick="window.history.back()" type="button">Cancel</button>

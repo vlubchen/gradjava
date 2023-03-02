@@ -16,6 +16,8 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 
+import static ru.vlubchen.gradjava.util.RestaurantUtil.restaurants;
+
 public class SpringMain {
     public static void main(String[] args) {
         ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
@@ -31,7 +33,7 @@ public class SpringMain {
 
         DishRepository dishRepository = appCtx.getBean(DishRepository.class);
         DishRestController dishRestController = appCtx.getBean(DishRestController.class);
-        dishRestController.create(new Dish(null, LocalDate.of(2023, Month.JANUARY, 9), Restaurant.BeerHouse,"Новое блюдо",250));
+        dishRestController.create(new Dish(null, LocalDate.of(2023, Month.JANUARY, 9), restaurants.get(2),"Новое блюдо",250));
         appCtx.close();
     }
 }

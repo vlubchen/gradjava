@@ -10,13 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static ru.vlubchen.gradjava.util.RestaurantUtil.restaurants;
+
 public class RestaurantsServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(RestaurantsServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.info("forward to restaurants");
-        request.setAttribute("restaurants", Restaurant.values());
+        request.setAttribute("restaurants", restaurants.toArray());
         request.getRequestDispatcher("/restaurants.jsp").forward(request, response);
     }
 }
