@@ -11,6 +11,13 @@ public class User extends AbstractNamedEntity {
     private Date registered = new Date();
     private Set<Role> roles;
 
+    public User() {
+    }
+
+    public User(User u) {
+        this(u.id, u.name, u.email, u.password, u.enabled, u.registered, u.roles);
+    }
+
     public User(Integer id, String name, String email, String password, boolean enabled, Date registered, Collection<Role> roles) {
         super(id, name);
         this.email = email;
