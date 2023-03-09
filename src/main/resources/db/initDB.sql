@@ -39,7 +39,7 @@ CREATE UNIQUE INDEX restaurant_unique_name_idx ON restaurant (name);
 CREATE TABLE dish
 (
     id            INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-    restaurant_id INTEGER NOT NULL,
+    restaurant_id INTEGER,
     name          VARCHAR NOT NULL,
     day           DATE    NOT NULL,
     price         INTEGER NOT NULL,
