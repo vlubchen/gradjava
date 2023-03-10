@@ -74,13 +74,13 @@ public class JdbcDishRepository implements DishRepository {
     @Override
     public List<Dish> getAll() {
         return jdbcTemplate.query(
-                "SELECT * FROM dish ORDER BY day", ROW_MAPPER);
+                "SELECT * FROM dish ORDER BY id", ROW_MAPPER);
     }
 
     @Override
     public List<Dish> getByDay(LocalDate day) {
         return jdbcTemplate.query(
-                "SELECT * FROM dish WHERE day = ? ORDER BY day",
+                "SELECT * FROM dish WHERE day = ? ORDER BY id",
                 ROW_MAPPER, day);
     }
 }

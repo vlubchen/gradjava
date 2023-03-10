@@ -2,7 +2,6 @@ package ru.vlubchen.gradjava.web.user;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +13,8 @@ import ru.vlubchen.gradjava.util.exception.NotFoundException;
 import static ru.vlubchen.gradjava.UserTestData.NOT_FOUND;
 import static ru.vlubchen.gradjava.UserTestData.USER_ID;
 
-@ContextConfiguration("classpath:spring/spring-app.xml")
+@ContextConfiguration({"classpath:spring/spring-app.xml", "classpath:spring/inmemory.xml"})
 @RunWith(SpringRunner.class)
-@Ignore
 public class InMemoryAdminRestControllerSpringTest {
     @Autowired
     private AdminRestController controller;
