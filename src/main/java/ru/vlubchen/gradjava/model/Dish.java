@@ -6,10 +6,18 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+@NamedQueries(value = {
+        @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish u WHERE u.id=:id"),
+        @NamedQuery(name = Dish.BY_DAY, query = "SELECT u FROM Dish u JOIN FETCH u.restaurant WHERE u.day=?1"),
+        @NamedQuery(name = Dish.ALL_SORTED, query = "SELECT u FROM Dish u JOIN FETCH u.restaurant ORDER BY u.day"),
+})
 @Entity
 @Table(name = "dish", uniqueConstraints = {@UniqueConstraint(columnNames = {"day", "restaurant_id", "name"}, name = "dish_unique_day_restaurant_id_name")})
 public class Dish extends AbstractNamedEntity {
 
+    public static final String DELETE = "Dish.delete";
+    public static final String BY_DAY = "Dish.getByDay";
+    public static final String ALL_SORTED = "Dish.getAllSorted";
     @Column(name = "day", nullable = false)
     @NotNull
     private LocalDate day;
