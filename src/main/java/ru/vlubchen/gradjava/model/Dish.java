@@ -1,13 +1,27 @@
 package ru.vlubchen.gradjava.model;
 
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "dish", uniqueConstraints = {@UniqueConstraint(columnNames = {"day", "restaurant_id", "name"}, name = "dish_unique_day_restaurant_id_name")})
 public class Dish extends AbstractNamedEntity {
 
+    @Column(name = "day", nullable = false)
+    @NotNull
     private LocalDate day;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    @NotNull
     private Restaurant restaurant;
 
+    @Column(name = "price", nullable = false)
+    @Range(min = 10, max = 10000)
+    @NotNull
     private int price;
 
     public Dish() {
