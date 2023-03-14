@@ -1,11 +1,13 @@
 package ru.vlubchen.gradjava.repository.datajpa;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Repository;
 import ru.vlubchen.gradjava.model.User;
 import ru.vlubchen.gradjava.repository.UserRepository;
 
 import java.util.List;
 
+@Repository
 public class DataJpaUserRepository implements UserRepository {
 
     private static final Sort SORT_NAME_EMAIL = Sort.by(Sort.Direction.ASC, "name", "email");

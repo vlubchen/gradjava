@@ -1,12 +1,17 @@
 package ru.vlubchen.gradjava.repository.datajpa;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Repository;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.repository.DishRepository;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Repository
 public class DataJpaDishRepository implements DishRepository {
+
+    private static final Sort SORT_DAY = Sort.by(Sort.Direction.DESC, "day");
     private final CrudDishRepository crudRepository;
 
     public DataJpaDishRepository(CrudDishRepository crudRepository) {
@@ -20,21 +25,21 @@ public class DataJpaDishRepository implements DishRepository {
 
     @Override
     public boolean delete(int id) {
-        return false;
+        return crudRepository.delete(id) != 0;
     }
 
     @Override
     public Dish get(int id) {
-        return null;
+        return crudRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<Dish> getAll() {
-        return null;
+        return crudRepository.findAll(SORT_DAY);
     }
 
     @Override
     public List<Dish> getByDay(LocalDate day) {
-        return null;
+        return crudRepository.getByDay(day);
     }
 }

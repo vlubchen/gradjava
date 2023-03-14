@@ -5,18 +5,14 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
-import ru.vlubchen.gradjava.model.Dish;
-
-import java.time.LocalDate;
-import java.util.List;
+import ru.vlubchen.gradjava.model.Restaurant;
 
 @Transactional(readOnly = true)
-public interface CrudDishRepository extends JpaRepository<Dish, Integer> {
+public interface CrudRestaurantRepository extends JpaRepository<Restaurant, Integer> {
     @Transactional
     @Modifying
-    @Query("DELETE FROM Dish u WHERE u.id=:id")
+    @Query("DELETE FROM Restaurant u WHERE u.id=:id")
     int delete(@Param("id") int id);
 
-    @Query("SELECT d from Dish d WHERE d.day = :day ORDER BY d.day DESC")
-    List<Dish> getByDay(@Param("day") LocalDate day);
+    Restaurant getByName(String name);
 }

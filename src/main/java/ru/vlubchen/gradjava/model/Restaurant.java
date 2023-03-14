@@ -28,11 +28,12 @@ public class Restaurant extends AbstractNamedEntity {
     private String email;
 
     public Restaurant() {
-
     }
+
     public Restaurant(String name, String phone, String address, String email) {
         this(null, name, phone, address, email);
     }
+
     public Restaurant(Integer id, String name, String phone, String address, String email) {
         super(id, name);
         this.phone = phone;
