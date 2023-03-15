@@ -1,5 +1,7 @@
 package ru.vlubchen.gradjava.repository.datajpa;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.vlubchen.gradjava.model.User;
@@ -18,11 +20,13 @@ public class DataJpaUserRepository implements UserRepository {
         this.crudRepository = crudRepository;
     }
 
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public User save(User user) {
         return crudRepository.save(user);
     }
 
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public boolean delete(int id) {
         return crudRepository.delete(id) != 0;
@@ -38,6 +42,7 @@ public class DataJpaUserRepository implements UserRepository {
         return crudRepository.getByEmail(email);
     }
 
+    @Cacheable("users")
     @Override
     public List<User> getAll() {
         return crudRepository.findAll(SORT_NAME_EMAIL);
