@@ -1,16 +1,12 @@
-package ru.vlubchen.gradjava.repository.jdbc;
+package ru.vlubchen.gradjava.repository.datajpa;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.junit4.SpringRunner;
 import ru.vlubchen.gradjava.UserTestData;
 import ru.vlubchen.gradjava.model.Role;
 import ru.vlubchen.gradjava.model.User;
+import ru.vlubchen.gradjava.repository.AbstractRepositoryTest;
 import ru.vlubchen.gradjava.repository.UserRepository;
 import ru.vlubchen.gradjava.util.exception.NotFoundException;
 
@@ -20,13 +16,7 @@ import static org.junit.Assert.assertThrows;
 import static ru.vlubchen.gradjava.UserTestData.*;
 import static ru.vlubchen.gradjava.util.ValidationUtil.checkNotFoundWithId;
 
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
-})
-@RunWith(SpringRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class JdbcUserRepositoryTest {
+public class DataJpaUserRepositoryTest extends AbstractRepositoryTest {
     @Autowired
     private UserRepository repository;
 

@@ -1,14 +1,12 @@
-package ru.vlubchen.gradjava.repository.jdbc;
+package ru.vlubchen.gradjava.repository.datajpa;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.context.junit4.SpringRunner;
 import ru.vlubchen.gradjava.model.Dish;
+import ru.vlubchen.gradjava.repository.AbstractRepositoryTest;
 import ru.vlubchen.gradjava.repository.DishRepository;
 import ru.vlubchen.gradjava.util.exception.NotFoundException;
 
@@ -21,16 +19,17 @@ import static ru.vlubchen.gradjava.DishTestData.*;
 import static ru.vlubchen.gradjava.util.RestaurantUtil.restaurants;
 import static ru.vlubchen.gradjava.util.ValidationUtil.checkNotFoundWithId;
 
-
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
-})
-@RunWith(SpringRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class JdbcDishRepositoryTest {
+public class DataJpaDishRepositoryTest extends AbstractRepositoryTest {
     @Autowired
     private DishRepository repository;
+
+    @Autowired
+    private CacheManager cacheManager;
+
+    @Before
+    public void setup() {
+        cacheManager.getCache("users").clear();
+    }
 
     @Test
     public void save() {
@@ -79,6 +78,6 @@ public class JdbcDishRepositoryTest {
     @Test
     public void getByDay() {
         assertMatch(repository.getByDay(LocalDate.of(2023, Month.MARCH, 10)),
-                dish13, dish14, dish15, dish16);
+                dish16, dish15, dish14, dish13);
     }
 }

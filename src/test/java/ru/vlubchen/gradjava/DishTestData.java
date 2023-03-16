@@ -33,7 +33,9 @@ public class DishTestData {
     public static final Dish dish15 = new Dish(DISH1_ID + 14, LocalDate.of(2023, Month.MARCH, 10), restaurants.get(1), "Оливье", 150);
     public static final Dish dish16 = new Dish(DISH1_ID + 15, LocalDate.of(2023, Month.MARCH, 10), restaurants.get(1), "Чай", 50);
 
-    public static final List<Dish> dishes = Arrays.asList(dish1, dish2, dish3, dish4, dish5, dish6, dish7, dish8, dish9, dish10, dish11, dish12, dish13, dish14, dish15, dish16);
+    public static final List<Dish> dishes = Arrays.asList(dish16, dish15, dish14, dish13, dish12, dish11, dish10, dish9, dish8, dish7, dish6, dish5, dish4, dish3, dish2, dish1);
+
+
 
     public static Dish getNew() {
         return new Dish(null, LocalDate.of(2023, Month.JANUARY, 9), restaurants.get(0), "Новое блюдо", 500);

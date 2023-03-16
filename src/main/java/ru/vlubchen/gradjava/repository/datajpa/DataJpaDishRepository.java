@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class DataJpaDishRepository implements DishRepository {
 
-    private static final Sort SORT_DAY = Sort.by(Sort.Direction.DESC, "day");
+    private static final Sort SORT_ID = Sort.by(Sort.Direction.DESC, "id");
     private final CrudDishRepository crudRepository;
 
     public DataJpaDishRepository(CrudDishRepository crudRepository) {
@@ -35,7 +35,7 @@ public class DataJpaDishRepository implements DishRepository {
 
     @Override
     public List<Dish> getAll() {
-        return crudRepository.findAll(SORT_DAY);
+        return crudRepository.findAll(SORT_ID);
     }
 
     @Override
