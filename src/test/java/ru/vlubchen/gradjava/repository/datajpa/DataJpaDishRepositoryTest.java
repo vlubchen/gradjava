@@ -10,6 +10,7 @@ import ru.vlubchen.gradjava.repository.AbstractRepositoryTest;
 import ru.vlubchen.gradjava.repository.DishRepository;
 import ru.vlubchen.gradjava.util.exception.NotFoundException;
 
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
@@ -79,5 +80,13 @@ public class DataJpaDishRepositoryTest extends AbstractRepositoryTest {
     public void getByDay() {
         assertMatch(repository.getByDay(LocalDate.of(2023, Month.MARCH, 10)),
                 dish16, dish15, dish14, dish13);
+    }
+
+    @Test
+    public void createWithException() throws Exception {
+        validateRootCause(ConstraintViolationException.class, () -> repository.save(new Dish(null, null, restaurants.get(1), "Чай", 50)));
+        validateRootCause(ConstraintViolationException.class, () -> repository.save(new Dish(null, LocalDate.of(2023, Month.MARCH, 10), restaurants.get(1), "Чай", 0)));
+        validateRootCause(ConstraintViolationException.class, () -> repository.save(new Dish(null, LocalDate.of(2023, Month.MARCH, 10), restaurants.get(1), "Чай", 9)));
+        validateRootCause(ConstraintViolationException.class, () -> repository.save(new Dish(null, LocalDate.of(2023, Month.MARCH, 10), restaurants.get(1), "Стэйк", 10001)));
     }
 }

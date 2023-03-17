@@ -10,7 +10,10 @@ import ru.vlubchen.gradjava.repository.AbstractRepositoryTest;
 import ru.vlubchen.gradjava.repository.UserRepository;
 import ru.vlubchen.gradjava.util.exception.NotFoundException;
 
+import javax.validation.ConstraintViolationException;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertThrows;
 import static ru.vlubchen.gradjava.UserTestData.*;
@@ -75,5 +78,13 @@ public class DataJpaUserRepositoryTest extends AbstractRepositoryTest {
     public void getAll() {
         List<User> all = repository.getAll();
         assertMatch(all, admin, guest, user);
+    }
+
+    @Test
+    public void createWithException() throws Exception {
+        validateRootCause(ConstraintViolationException.class, () -> repository.save(new User(null, " ", "mail@yandex.ru", "password", Role.USER)));
+        validateRootCause(ConstraintViolationException.class, () -> repository.save(new User(null, "User", "  ", "password", Role.USER)));
+        validateRootCause(ConstraintViolationException.class, () -> repository.save(new User(null, "User", "mail@yandex.ru", "  ", Role.USER)));
+        validateRootCause(ConstraintViolationException.class, () -> repository.save(new User(null, "User", "mail@yandex.ru", "pass", true, new Date(), Set.of())));
     }
 }
