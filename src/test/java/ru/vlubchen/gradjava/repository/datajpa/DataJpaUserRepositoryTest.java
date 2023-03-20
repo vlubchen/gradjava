@@ -1,12 +1,15 @@
 package ru.vlubchen.gradjava.repository.datajpa;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.dao.DataAccessException;
 import ru.vlubchen.gradjava.UserTestData;
 import ru.vlubchen.gradjava.model.Role;
 import ru.vlubchen.gradjava.model.User;
 import ru.vlubchen.gradjava.repository.AbstractRepositoryTest;
+import ru.vlubchen.gradjava.repository.JpaUtil;
 import ru.vlubchen.gradjava.repository.UserRepository;
 import ru.vlubchen.gradjava.util.exception.NotFoundException;
 
@@ -22,6 +25,18 @@ import static ru.vlubchen.gradjava.util.ValidationUtil.checkNotFoundWithId;
 public class DataJpaUserRepositoryTest extends AbstractRepositoryTest {
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private CacheManager cacheManager;
+
+    @Autowired
+    protected JpaUtil jpaUtil;
+
+    @Before
+    public void setup() {
+        cacheManager.getCache("users").clear();
+        jpaUtil.clear2ndLevelHibernateCache();
+    }
 
     @Test
     public void save() {
