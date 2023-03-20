@@ -1,8 +1,9 @@
 package ru.vlubchen.gradjava.web;
 
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.util.DateTimeUtil;
 import ru.vlubchen.gradjava.web.dish.DishRestController;
@@ -24,7 +25,7 @@ public class DishesServlet extends HttpServlet {
 
     @Override
     public void init() {
-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
+        WebApplicationContext springContext = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
         dishController = springContext.getBean(DishRestController.class);
     }
 
@@ -40,7 +41,7 @@ public class DishesServlet extends HttpServlet {
 
         Dish dish = new Dish(
                 LocalDate.parse(request.getParameter("day")),
-                null,//request.getParameter("restaurant"),
+                restaurants.get(2),//request.getParameter("restaurant"),
                 request.getParameter("name"),
                 Integer.parseInt(request.getParameter("price")));
 
@@ -65,7 +66,7 @@ public class DishesServlet extends HttpServlet {
             case "create":
             case "update":
                 final Dish dish = "create".equals(action) ?
-                        new Dish(LocalDate.now(), restaurants.get(2), "Новое блюдо", 0) :
+                        new Dish(LocalDate.now(), restaurants.get(2), "Новое блюдо", 100) :
                         dishController.get(getId(request));
                 request.setAttribute("dish", dish);
                 request.getRequestDispatcher("/dishForm.jsp").forward(request, response);
