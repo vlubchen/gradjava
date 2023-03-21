@@ -4,26 +4,11 @@
 <html lang="ru">
 <head>
     <title>Dishes</title>
-    <style type="text/css">
-        TABLE {
-            width: 600px;
-            border-collapse: collapse;
-        }
-
-        TD, TH {
-            padding: 3px;
-            border: 2px solid black;
-        }
-
-        TH {
-            background: #aac0f8;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h3><a href="index.html">Home</a></h3>
+<h3><a href="index.jsp">Home</a></h3>
 <hr>
-<h2>Dishes</h2>
 <form method="get" action="dishes">
     <input type="hidden" name="action" value="filter">
     <label>Choose date:</label>
@@ -33,7 +18,7 @@
 <hr/>
 <a href="dishes?action=create">Add Dish</a>
 <br><br>
-<table>
+<table border="1" cellpadding="8" cellspacing="0">
     <thead>
     <tr>
         <th>Date</th>
@@ -46,7 +31,7 @@
     </thead>
     <c:forEach items="${requestScope.dishes}" var="dish">
         <jsp:useBean id="dish" type="ru.vlubchen.gradjava.to.DishTo"/>
-        <tr style="color: green">
+        <tr>
             <td>${dish.day}</td>
             <td>${dish.restaurant}</td>
             <td>${dish.name}</td>

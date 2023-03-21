@@ -6,7 +6,7 @@
     <title>Restaurants</title>
 </head>
 <body>
-<h3><a href="index.html">Home</a></h3>
+<h3><a href="index.jsp">Home</a></h3>
 <hr>
 <h2>Restaurants</h2>
 <table border="1" cellpadding="8" cellspacing="0">
