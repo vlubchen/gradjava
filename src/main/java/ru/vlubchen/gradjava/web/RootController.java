@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.vlubchen.gradjava.repository.DishRepository;
 import ru.vlubchen.gradjava.repository.UserRepository;
+import ru.vlubchen.gradjava.util.DishUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +18,10 @@ public class RootController {
     private static final Logger log = LoggerFactory.getLogger(RootController.class);
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private DishRepository dishRepository;
 
     @GetMapping("/")
     public String root() {
@@ -27,7 +32,7 @@ public class RootController {
     @GetMapping("/users")
     public String getUsers(Model model) {
         log.info("users");
-        model.addAttribute("users", repository.getAll());
+        model.addAttribute("users", userRepository.getAll());
         return "users";
     }
 
@@ -37,6 +42,14 @@ public class RootController {
         log.info("setUser {}", userId);
         SecurityUtil.setAuthUserId(userId);
         return "redirect:dishes";
+    }
+
+    @GetMapping("/dishes")
+    public String getDishes(Model model) {
+        log.info("dishes");
+        model.addAttribute("dishes",
+                DishUtil.getDishesTo(dishRepository.getAll()));
+        return "dishes";
     }
 }
 

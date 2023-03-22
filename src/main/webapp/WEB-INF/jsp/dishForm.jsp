@@ -1,54 +1,36 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <html>
-<head>
-    <title>Meal</title>
-    <style>
-        dl {
-            background: none repeat scroll 0 0 #FAFAFA;
-            margin: 8px 0;
-            padding: 0;
-        }
-
-        dt {
-            display: inline-block;
-            width: 170px;
-        }
-
-        dd {
-            display: inline-block;
-            margin-left: 8px;
-            vertical-align: top;
-        }
-    </style>
-</head>
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
+
 <section>
-    <h3><a href="index.html">Home</a></h3>
-    <hr>
-    <h2>${param.action == 'create' ? 'Create dish' : 'Edit dish'}</h2>
     <jsp:useBean id="dish" type="ru.vlubchen.gradjava.model.Dish" scope="request"/>
+    <h3><fmt:message key="${dish.isNew() ? 'dish.add' : 'dish.edit'}"/></h3>
+    <hr>
     <form method="post" action="dishes">
         <input type="hidden" name="id" value="${dish.id}">
         <dl>
-            <dt>Date:</dt>
+            <dt><fmt:message key="dish.day"/></dt>
             <dd><input type="date" value="${dish.day}" name="day" required></dd>
         </dl>
         <dl>
-            <dt>Restaurant:</dt>
+            <dt><fmt:message key="dish.restaurant"/></dt>
             <dd><input type="text" value="${dish.restaurant}" name="restaurant" required></dd>
         </dl>
         <dl>
-            <dt>Description:</dt>
+            <dt><fmt:message key="dish.name"/></dt>
             <dd><input type="text" value="${dish.name}" size=40 name="name" required></dd>
         </dl>
         <dl>
-            <dt>Price:</dt>
-            <dd><input type="text" value="${dish.price}" name="price" required></dd>
+            <dt><fmt:message key="dish.price"/></dt>
+            <dd><input type="int" value="${dish.price}" name="price" required></dd>
         </dl>
-        <button type="submit">Save</button>
-        <button onclick="window.history.back()" type="button">Cancel</button>
+        <button type="submit"><fmt:message key="common.save"/></button>
+        <button onclick="window.history.back()" type="button"><fmt:message key="common.cancel"/></button>
     </form>
 </section>
 </body>
