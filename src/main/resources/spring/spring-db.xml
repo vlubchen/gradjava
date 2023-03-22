@@ -13,13 +13,11 @@
        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
 
+    <!-- For tomcat pool jndi cargo -->
+<!--    <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/gradjava"/>-->
+<!--    <context:property-placeholder location="classpath:db/tomcat.properties" system-properties-mode="OVERRIDE"/>-->
 
-    <bean>
-        <jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/gradjava"/>
-        <context:property-placeholder location="classpath:db/tomcat.properties" system-properties-mode="OVERRIDE"/>
-    </bean>
     <!-- Change DB by comment/uncomment property-placeholder -->
-
     <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
 <!--    <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>-->
 
