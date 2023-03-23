@@ -20,7 +20,7 @@ public class JspDishController extends AbstractDishController {
     @GetMapping("/delete")
     public String delete(HttpServletRequest request) {
         super.delete(getId(request));
-        return "redirect:dishes";
+        return "redirect:/dishes";
     }
 
     @GetMapping("/update")
@@ -47,7 +47,7 @@ public class JspDishController extends AbstractDishController {
         } else {
             super.update(dish, getId(request));
         }
-        return "redirect:dishes";
+        return "redirect:/dishes";
     }
 
     @GetMapping("/filter")
