@@ -14,9 +14,8 @@ import ru.vlubchen.gradjava.util.exception.NotFoundException;
 import static ru.vlubchen.gradjava.UserTestData.NOT_FOUND;
 import static ru.vlubchen.gradjava.UserTestData.USER_ID;
 
-@ContextConfiguration({"classpath:spring/spring-app.xml", "classpath:spring/inmemory.xml"})
+@ContextConfiguration("classpath:spring/inmemory.xml")
 @RunWith(SpringRunner.class)
-@Ignore
 public class InMemoryAdminRestControllerSpringTest {
     @Autowired
     private AdminRestController controller;

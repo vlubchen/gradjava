@@ -19,7 +19,7 @@ import static ru.vlubchen.gradjava.util.RestaurantUtil.restaurants;
 
 public class SpringMain {
     public static void main(String[] args) {
-        ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/inmemory.xml");
+        ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/inmemory.xml");
         System.out.println("Bean definition names:" + Arrays.toString(appCtx.getBeanDefinitionNames()));
         //UserRepository userRepository = (UserRepository) appCtx.getBean("inMemoryUserRepository");
         UserRepository userRepository = appCtx.getBean(UserRepository.class);

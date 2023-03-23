@@ -13,7 +13,6 @@ import java.util.Arrays;
 import static ru.vlubchen.gradjava.UserTestData.NOT_FOUND;
 import static ru.vlubchen.gradjava.UserTestData.USER_ID;
 
-@Ignore
 public class InMemoryAdminRestControllerTest {
     private static final Logger log = LoggerFactory.getLogger(InMemoryAdminRestControllerTest.class);
 
@@ -24,7 +23,7 @@ public class InMemoryAdminRestControllerTest {
 
     @BeforeClass
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/inmemory.xml");
+        appCtx = new ClassPathXmlApplicationContext("spring/inmemory.xml");
         log.info("\n{}\n", Arrays.toString(appCtx.getBeanDefinitionNames()));
         controller = appCtx.getBean(AdminRestController.class);
         repository = appCtx.getBean(InMemoryUserRepository.class);

@@ -20,7 +20,7 @@ import static ru.vlubchen.gradjava.util.ValidationUtil.getRootCause;
 })
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class AbstractRepositoryTest {
+public abstract class AbstractRepositoryTest {
 
     @ClassRule
     public static ExternalResource summary = TimingRules.SUMMARY;
