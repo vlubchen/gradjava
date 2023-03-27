@@ -38,7 +38,7 @@ public class JspDishController extends AbstractDishController {
     @PostMapping
     public String updateOrCreate(HttpServletRequest request) {
         Dish dish = new Dish(LocalDate.parse(request.getParameter("day")),
-                restaurants.get(0),
+                restaurantRepository.getByName(request.getParameter("restaurant")),
                 request.getParameter("name"),
                 Integer.parseInt(request.getParameter("price")));
 
@@ -53,7 +53,7 @@ public class JspDishController extends AbstractDishController {
     @GetMapping("/filter")
     public String getBetween(HttpServletRequest request, Model model) {
         LocalDate day = parseLocalDate(request.getParameter("day"));
-        model.addAttribute("dishes", super.getByDay(day));
+        model.addAttribute("dishes", day != null ? super.getByDay(day) : super.getAll());
         return "dishes";
     }
 

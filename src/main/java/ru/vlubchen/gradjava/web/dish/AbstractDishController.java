@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.repository.DishRepository;
+import ru.vlubchen.gradjava.repository.RestaurantRepository;
 import ru.vlubchen.gradjava.to.DishTo;
 import ru.vlubchen.gradjava.util.DishUtil;
 
@@ -16,39 +17,42 @@ import static ru.vlubchen.gradjava.util.ValidationUtil.*;
 
 public abstract class AbstractDishController {
     @Autowired
-    private DishRepository repository;
+    private DishRepository dishRepository;
+
+    @Autowired
+    protected RestaurantRepository restaurantRepository;
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     public List<DishTo> getAll() {
         log.info("getAll");
-        return DishUtil.getDishesTo(repository.getAll());
+        return DishUtil.getDishesTo(dishRepository.getAll());
     }
 
     public Dish get(int id) {
         log.info("get {}", id);
-        return checkNotFoundWithId(repository.get(id), id);
+        return checkNotFoundWithId(dishRepository.get(id), id);
     }
 
     public Dish create(Dish dish) {
         log.info("create {}", dish);
         checkNew(dish);
-        return repository.save(dish);
+        return dishRepository.save(dish);
     }
 
     public void delete(int id) {
         log.info("delete {}", id);
-        checkNotFoundWithId(repository.delete(id), id);
+        checkNotFoundWithId(dishRepository.delete(id), id);
     }
 
     public void update(Dish dish, int id) {
         log.info("update {} with id={}", dish, id);
         assureIdConsistent(dish, id);
-        checkNotFoundWithId(repository.save(dish), dish.getId());
+        checkNotFoundWithId(dishRepository.save(dish), dish.getId());
     }
 
     public List<DishTo> getByDay(@Nullable LocalDate day) {
         log.info("getByDay {}", day);
-        List<Dish> dishesDateFiltered = repository.getByDay(day);
+        List<Dish> dishesDateFiltered = dishRepository.getByDay(day);
         return DishUtil.getFilteredDishesTo(dishesDateFiltered, day);
     }
 }
