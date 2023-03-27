@@ -38,8 +38,8 @@ public class DataJpaDishRepositoryTest extends AbstractRepositoryTest {
         Integer newId = created.getId();
         Dish newDish = getNew();
         newDish.setId(newId);
-        assertMatch(created, newDish);
-        assertMatch(repository.get(newId), newDish);
+        DISH_MATCHER.assertMatch(created, newDish);
+        DISH_MATCHER.assertMatch(repository.get(newId), newDish);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class DataJpaDishRepositoryTest extends AbstractRepositoryTest {
     @Test
     public void get() {
         Dish dish = repository.get(DISH1_ID);
-        assertMatch(dish, dish1);
+        DISH_MATCHER.assertMatch(dish, dish1);
     }
 
     @Test
@@ -73,12 +73,12 @@ public class DataJpaDishRepositoryTest extends AbstractRepositoryTest {
     @Test
     public void getAll() {
         List<Dish> all = repository.getAll();
-        assertMatch(all, dishes);
+        DISH_MATCHER.assertMatch(all, dishes);
     }
 
     @Test
     public void getByDay() {
-        assertMatch(repository.getByDay(LocalDate.of(2023, Month.MARCH, 10)),
+        DISH_MATCHER.assertMatch(repository.getByDay(LocalDate.of(2023, Month.MARCH, 10)),
                 dish16, dish15, dish14, dish13);
     }
 

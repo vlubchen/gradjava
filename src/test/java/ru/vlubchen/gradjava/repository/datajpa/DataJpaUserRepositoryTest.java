@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.dao.DataAccessException;
-import ru.vlubchen.gradjava.UserTestData;
 import ru.vlubchen.gradjava.model.Role;
 import ru.vlubchen.gradjava.model.User;
 import ru.vlubchen.gradjava.repository.AbstractRepositoryTest;
@@ -44,8 +43,8 @@ public class DataJpaUserRepositoryTest extends AbstractRepositoryTest {
         Integer newId = created.getId();
         User newUser = getNew();
         newUser.setId(newId);
-        assertMatch(created, newUser);
-        assertMatch(repository.get(newId), newUser);
+        USER_MATCHER.assertMatch(created, newUser);
+        USER_MATCHER.assertMatch(repository.get(newId), newUser);
     }
 
     @Test
@@ -67,8 +66,8 @@ public class DataJpaUserRepositoryTest extends AbstractRepositoryTest {
 
     @Test
     public void get() {
-        User user = repository.get(USER_ID);
-        assertMatch(user, UserTestData.user);
+        User user = repository.get(ADMIN_ID);
+        USER_MATCHER.assertMatch(user, admin);
     }
 
     @Test
@@ -79,20 +78,20 @@ public class DataJpaUserRepositoryTest extends AbstractRepositoryTest {
     @Test
     public void getByEmail() {
         User user = repository.getByEmail("admin@gmail.com");
-        assertMatch(user, admin);
+        USER_MATCHER.assertMatch(user, admin);
     }
 
     @Test
     public void update() {
         User updated = getUpdated();
         repository.save(updated);
-        assertMatch(repository.get(USER_ID), getUpdated());
+        USER_MATCHER.assertMatch(repository.get(USER_ID), getUpdated());
     }
 
     @Test
     public void getAll() {
         List<User> all = repository.getAll();
-        assertMatch(all, admin, guest, user);
+        USER_MATCHER.assertMatch(all, admin, guest, user);
     }
 
     @Test

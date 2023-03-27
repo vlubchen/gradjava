@@ -1,11 +1,13 @@
 package ru.vlubchen.gradjava.web.dish;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.vlubchen.gradjava.model.Dish;
+import ru.vlubchen.gradjava.repository.RestaurantRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
@@ -17,6 +19,10 @@ import static ru.vlubchen.gradjava.util.RestaurantUtil.restaurants;
 @Controller
 @RequestMapping("/dishes")
 public class JspDishController extends AbstractDishController {
+
+    @Autowired(required=false)
+    private RestaurantRepository restaurantRepository;
+
     @GetMapping("/delete")
     public String delete(HttpServletRequest request) {
         super.delete(getId(request));

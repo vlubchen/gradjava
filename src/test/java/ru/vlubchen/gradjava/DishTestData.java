@@ -8,11 +8,12 @@ import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static ru.vlubchen.gradjava.model.AbstractBaseEntity.START_SEQ;
 import static ru.vlubchen.gradjava.util.RestaurantUtil.restaurants;
 
 public class DishTestData {
+
+    public static final MatcherFactory.Matcher<Dish> DISH_MATCHER = MatcherFactory.usingIgnoringFieldsComparator("restaurant");
     public static final int NOT_FOUND = 10;
     public static final int DISH1_ID = START_SEQ + 6;
 
@@ -43,17 +44,5 @@ public class DishTestData {
 
     public static Dish getUpdated() {
         return new Dish(DISH1_ID, dish1.getDay().plus(2, ChronoUnit.DAYS), dish1.getRestaurant(), "Обновленное блюдо", 200);
-    }
-
-    public static void assertMatch(Dish actual, Dish expected) {
-        assertThat(actual).usingRecursiveComparison().ignoringFields("restaurant").isEqualTo(expected);
-    }
-
-    public static void assertMatch(Iterable<Dish> actual, Dish... expected) {
-        assertMatch(actual, Arrays.asList(expected));
-    }
-
-    public static void assertMatch(Iterable<Dish> actual, Iterable<Dish> expected) {
-        assertThat(actual).usingRecursiveComparison().ignoringFields("restaurant").isEqualTo(expected);
     }
 }

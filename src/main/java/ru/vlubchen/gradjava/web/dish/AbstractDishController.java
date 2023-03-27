@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.repository.DishRepository;
-import ru.vlubchen.gradjava.repository.RestaurantRepository;
 import ru.vlubchen.gradjava.to.DishTo;
 import ru.vlubchen.gradjava.util.DishUtil;
 
@@ -19,8 +18,6 @@ public abstract class AbstractDishController {
     @Autowired
     private DishRepository dishRepository;
 
-    @Autowired
-    protected RestaurantRepository restaurantRepository;
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     public List<DishTo> getAll() {
