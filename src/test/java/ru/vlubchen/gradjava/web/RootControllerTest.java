@@ -1,6 +1,6 @@
 package ru.vlubchen.gradjava.web;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import ru.vlubchen.gradjava.UserTestData;
 
 import static org.hamcrest.Matchers.*;
@@ -11,7 +11,7 @@ import static ru.vlubchen.gradjava.model.AbstractBaseEntity.START_SEQ;
 
 public class RootControllerTest extends AbstractControllerTest{
     @Test
-    public void getUsers() throws Exception {
+    void getUsers() throws Exception {
         perform(get("/users"))
                 .andDo(print())
                 .andExpect(status().isOk())
