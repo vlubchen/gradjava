@@ -1,5 +1,6 @@
 package ru.vlubchen.gradjava.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
 import org.springframework.util.CollectionUtils;
@@ -52,11 +53,12 @@ public class User extends AbstractNamedEntity {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role"}, name = "uk_user_roles")})
     @Column(name = "role")
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     //    @Fetch(FetchMode.SUBSELECT)
     @BatchSize(size = 200)
     @JoinColumn
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Set<Role> roles;
 
     public User() {
