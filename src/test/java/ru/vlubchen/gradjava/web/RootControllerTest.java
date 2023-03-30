@@ -1,15 +1,18 @@
 package ru.vlubchen.gradjava.web;
 
+import org.assertj.core.matcher.AssertionMatcher;
 import org.junit.jupiter.api.Test;
-import ru.vlubchen.gradjava.UserTestData;
+import ru.vlubchen.gradjava.model.User;
 
-import static org.hamcrest.Matchers.*;
+import java.util.List;
+
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static ru.vlubchen.gradjava.model.AbstractBaseEntity.START_SEQ;
+import static ru.vlubchen.gradjava.UserTestData.*;
 
-public class RootControllerTest extends AbstractControllerTest{
+public class RootControllerTest extends AbstractControllerTest {
     @Test
     void getUsers() throws Exception {
         perform(get("/users"))
@@ -18,11 +21,13 @@ public class RootControllerTest extends AbstractControllerTest{
                 .andExpect(view().name("users"))
                 .andExpect(forwardedUrl("/WEB-INF/jsp/users.jsp"))
                 .andExpect(model().attribute("users", hasSize(3)))
-                .andExpect(model().attribute("users", hasItem(
-                        allOf(
-                                hasProperty("id", is(START_SEQ)),
-                                hasProperty("name", is(UserTestData.user.getName()))
-                        )
-                )));
+                .andExpect(model().attribute("users",
+                        new AssertionMatcher<List<User>>() {
+                            @Override
+                            public void assertion(List<User> actual) throws AssertionError {
+                                USER_MATCHER.assertMatch(actual, admin, guest, user);
+                            }
+                        }
+                ));
     }
 }

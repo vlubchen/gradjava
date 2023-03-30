@@ -13,7 +13,7 @@ import static ru.vlubchen.gradjava.util.RestaurantUtil.restaurants;
 
 public class DishTestData {
 
-    public static final MatcherFactory.Matcher<Dish> DISH_MATCHER = MatcherFactory.usingIgnoringFieldsComparator("restaurant");
+    public static final MatcherFactory.Matcher<Dish> DISH_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(Dish.class, "restaurant");
     public static final int NOT_FOUND = 10;
     public static final int DISH1_ID = START_SEQ + 6;
 
@@ -35,7 +35,6 @@ public class DishTestData {
     public static final Dish dish16 = new Dish(DISH1_ID + 15, LocalDate.of(2023, Month.MARCH, 10), restaurants.get(1), "Чай", 50);
 
     public static final List<Dish> dishes = Arrays.asList(dish16, dish15, dish14, dish13, dish12, dish11, dish10, dish9, dish8, dish7, dish6, dish5, dish4, dish3, dish2, dish1);
-
 
 
     public static Dish getNew() {
