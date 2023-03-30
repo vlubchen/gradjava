@@ -55,9 +55,9 @@ public class DishRestController extends AbstractDishController {
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @GetMapping("/by-day")
+    @GetMapping("/filter")
     public List<DishTo> getByDay(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate day) {
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate day) {
         return super.getByDay(day);
     }
 }

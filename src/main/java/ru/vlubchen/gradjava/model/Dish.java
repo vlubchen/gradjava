@@ -22,7 +22,7 @@ public class Dish extends AbstractNamedEntity {
     @NotNull
     private LocalDate day;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @NotNull
     private Restaurant restaurant;
