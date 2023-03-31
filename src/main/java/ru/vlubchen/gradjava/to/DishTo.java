@@ -2,6 +2,7 @@ package ru.vlubchen.gradjava.to;
 
 import ru.vlubchen.gradjava.model.Restaurant;
 
+import java.beans.ConstructorProperties;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ public class DishTo {
 
     private final int price;
 
+    @ConstructorProperties({"id", "day", "restaurant", "name", "price"})
     public DishTo(Integer id, LocalDate dateOfLunch, Restaurant restaurant, String name, int price) {
         this.id = id;
         this.day = dateOfLunch;

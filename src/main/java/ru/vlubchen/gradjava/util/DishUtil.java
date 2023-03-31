@@ -25,4 +25,8 @@ public class DishUtil {
                 .map(dish -> new DishTo(dish.getId(), dish.getDay(), dish.getRestaurant(), dish.getName(), dish.getPrice()))
                 .collect(Collectors.toList());
     }
+
+    public static DishTo createTo(Dish dish) {
+        return new DishTo(dish.getId(), dish.getDay(), dish.getRestaurant(), dish.getName(), dish.getPrice());
+    }
 }
