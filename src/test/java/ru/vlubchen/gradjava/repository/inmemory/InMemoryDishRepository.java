@@ -3,9 +3,9 @@ package ru.vlubchen.gradjava.repository.inmemory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import ru.vlubchen.gradjava.DishTestData;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.repository.DishRepository;
-import ru.vlubchen.gradjava.util.DishUtil;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -24,7 +24,7 @@ public class InMemoryDishRepository implements DishRepository {
     private final AtomicInteger counter = new AtomicInteger(0);
 
     {
-        DishUtil.dishes.forEach(this::save);
+        DishTestData.dishes.forEach(this::save);
     }
 
     @Override
