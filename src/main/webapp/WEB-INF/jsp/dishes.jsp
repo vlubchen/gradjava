@@ -16,13 +16,17 @@
                 <form id="filter">
                     <div class="row">
                         <div class="col-3">
-                            <label for="filterDay"><spring:message code="dish.day"/></label>
-                            <input class="form-control" type="date" name="day" id="filterDay">
+                            <label for="day"><spring:message code="dish.day"/></label>
+                            <input class="form-control" type="date" name="day" id="day">
                         </div>
                     </div>
                 </form>
             </div>
             <div class="card-footer text-right">
+                <button class="btn btn-danger" onclick="clearFilter()">
+                    <span class="fa fa-remove"></span>
+                    <spring:message code="common.cancel"/>
+                </button>
                 <button class="btn btn-primary" onclick="ctx.updateTable()">
                     <span class="fa fa-filter"></span>
                     <spring:message code="dish.filter"/>
@@ -72,8 +76,8 @@
                     <input type="hidden" id="id" name="id">
 
                     <div class="form-group">
-                        <label for="day" class="col-form-label"><spring:message code="dish.day"/></label>
-                        <input type="date" class="form-control" id="day" name="day"
+                        <label for="dayNew" class="col-form-label"><spring:message code="dish.day"/></label>
+                        <input type="date" class="form-control" id="dayNew" name="day"
                                placeholder="<spring:message code="dish.day"/>">
                     </div>
 

@@ -1,4 +1,4 @@
-const dishAjaxUrl = "dishes/";
+const dishAjaxUrl = "admin/dishes/";
 // https://stackoverflow.com/a/5064235/548473
 const ctx = {
     ajaxUrl: dishAjaxUrl,
@@ -9,6 +9,12 @@ const ctx = {
             data: $("#filter").serialize()
         }).done(updateTableByData);
     }
+}
+
+function clearFilter() {
+    debugger;
+    $("#filter")[0].reset();
+    $.get(dishAjaxUrl, updateTableByData);
 }
 
 $(function () {

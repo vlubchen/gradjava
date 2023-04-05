@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/dishes", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/admin/dishes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DishUIController extends AbstractDishController {
 
     @Autowired(required=false)
