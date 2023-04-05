@@ -16,5 +16,6 @@
     </bean>
 -->
     <import resource="spring-cache.xml"/>
+    <import resource="spring-security.xml"/>
 
 </beans>
