@@ -5,13 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.vlubchen.gradjava.model.User;
 import ru.vlubchen.gradjava.repository.UserRepository;
+import ru.vlubchen.gradjava.to.UserTo;
+import ru.vlubchen.gradjava.util.UserUtil;
 
 import java.util.List;
 
-import static ru.vlubchen.gradjava.util.ValidationUtil.assureIdConsistent;
-import static ru.vlubchen.gradjava.util.ValidationUtil.checkNew;
-import static ru.vlubchen.gradjava.util.ValidationUtil.checkNotFound;
-import static ru.vlubchen.gradjava.util.ValidationUtil.checkNotFoundWithId;
+import static ru.vlubchen.gradjava.util.ValidationUtil.*;
 
 public abstract class AbstractUserController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -32,6 +31,10 @@ public abstract class AbstractUserController {
         log.info("create {}", user);
         checkNew(user);
         return repository.save(user);
+    }
+
+    public void create(UserTo userTo) {
+        create(UserUtil.createNewFromTo(userTo));
     }
 
     public void delete(int id) {
