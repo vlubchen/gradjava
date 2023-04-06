@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vlubchen.gradjava.model.User;
 import ru.vlubchen.gradjava.repository.UserRepository;
+import ru.vlubchen.gradjava.to.UserTo;
+import ru.vlubchen.gradjava.util.UserUtil;
 
 import java.util.List;
 
@@ -41,6 +43,14 @@ public class DataJpaUserRepository implements UserRepository {
     @Override
     public User getByEmail(String email) {
         return crudRepository.getByEmail(email);
+    }
+
+    @CacheEvict(value = "users", allEntries = true)
+    @Transactional
+    public void update(UserTo userTo) {
+        User user = get(userTo.id());
+        User updatedUser = UserUtil.updateFromTo(user, userTo);
+        crudRepository.save(updatedUser);
     }
 
     @Cacheable("users")

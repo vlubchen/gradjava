@@ -1,6 +1,7 @@
 package ru.vlubchen.gradjava.repository;
 
 import ru.vlubchen.gradjava.model.User;
+import ru.vlubchen.gradjava.to.UserTo;
 
 import java.util.List;
 
@@ -20,5 +21,8 @@ public interface UserRepository {
     List<User> getAll();
 
     default void enable(int id, boolean enabled){
+    };
+
+    default void update(UserTo userTo){
     };
 }

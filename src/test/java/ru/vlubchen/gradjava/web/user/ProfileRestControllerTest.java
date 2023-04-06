@@ -6,6 +6,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.vlubchen.gradjava.model.User;
 import ru.vlubchen.gradjava.repository.UserRepository;
+import ru.vlubchen.gradjava.to.UserTo;
+import ru.vlubchen.gradjava.util.UserUtil;
 import ru.vlubchen.gradjava.web.AbstractControllerTest;
 import ru.vlubchen.gradjava.web.json.JsonUtil;
 
@@ -36,12 +38,12 @@ class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     void update() throws Exception {
-        User updated = getUpdated();
+        UserTo updatedTo = new UserTo(null, "newName", "user@yandex.ru", "newPassword");
         perform(MockMvcRequestBuilders.put(REST_URL).contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(updated)))
+                .content(JsonUtil.writeValue(updatedTo)))
                 .andDo(print())
                 .andExpect(status().isNoContent());
 
-        USER_MATCHER.assertMatch(userRepository.get(USER_ID), updated);
+        USER_MATCHER.assertMatch(userRepository.get(USER_ID), UserUtil.updateFromTo(new User(user), updatedTo));
     }
 }

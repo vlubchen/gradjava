@@ -24,6 +24,7 @@ public abstract class AbstractBaseEntity implements HasId {
         this.id = id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }
@@ -31,11 +32,6 @@ public abstract class AbstractBaseEntity implements HasId {
     @Override
     public Integer getId() {
         return id;
-    }
-
-    @Override
-    public boolean isNew() {
-        return this.id == null;
     }
 
     @Override

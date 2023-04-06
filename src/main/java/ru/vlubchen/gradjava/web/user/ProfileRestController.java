@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.vlubchen.gradjava.model.User;
+import ru.vlubchen.gradjava.to.UserTo;
 
 import static ru.vlubchen.gradjava.web.SecurityUtil.authUserId;
 
@@ -26,8 +27,8 @@ public class ProfileRestController extends AbstractUserController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody User user) {
-        super.update(user, authUserId());
+    public void update(@RequestBody UserTo userTo) {
+        super.update(userTo, authUserId());
     }
 
     @GetMapping("/text")

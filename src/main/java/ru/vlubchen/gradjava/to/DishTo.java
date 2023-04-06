@@ -6,9 +6,7 @@ import java.beans.ConstructorProperties;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class DishTo {
-    private final Integer id;
-
+public class DishTo extends BaseTo {
     private final LocalDate day;
 
     private final Restaurant restaurant;
@@ -19,15 +17,11 @@ public class DishTo {
 
     @ConstructorProperties({"id", "day", "restaurant", "name", "price"})
     public DishTo(Integer id, LocalDate dateOfLunch, Restaurant restaurant, String name, int price) {
-        this.id = id;
+        super(id);
         this.day = dateOfLunch;
         this.restaurant = restaurant;
         this.name = name;
         this.price = price;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     @Override

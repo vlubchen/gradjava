@@ -34,7 +34,9 @@ public abstract class AbstractUserController {
     }
 
     public void create(UserTo userTo) {
-        create(UserUtil.createNewFromTo(userTo));
+        log.info("create {}", userTo);
+        checkNew(userTo);
+        repository.save(UserUtil.createNewFromTo(userTo));
     }
 
     public void delete(int id) {
@@ -46,6 +48,12 @@ public abstract class AbstractUserController {
         log.info("update {} with id={}", user, id);
         assureIdConsistent(user, id);
         checkNotFoundWithId(repository.save(user), user.getId());
+    }
+
+    public void update(UserTo userTo, int id) {
+        log.info("update {} with id={}", userTo, id);
+        assureIdConsistent(userTo, id);
+        repository.update(userTo);
     }
 
     public User getByMail(String email) {
