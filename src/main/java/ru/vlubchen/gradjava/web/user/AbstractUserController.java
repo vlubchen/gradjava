@@ -57,4 +57,9 @@ public abstract class AbstractUserController {
     public void setRepository(UserRepository repository) {
         this.repository = repository;
     }
+
+    public void enable(int id, boolean enabled) {
+        log.info(enabled ? "enable {}" : "disable {}", id);
+        repository.enable(id, enabled);
+    }
 }

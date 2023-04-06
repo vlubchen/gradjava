@@ -12,7 +12,6 @@ const ctx = {
 }
 
 function clearFilter() {
-    debugger;
     $("#filter")[0].reset();
     $.get(dishAjaxUrl, updateTableByData);
 }

@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static ru.vlubchen.gradjava.UserTestData.*;
 import static ru.vlubchen.gradjava.util.ValidationUtil.checkNotFoundWithId;
 
@@ -85,5 +85,13 @@ public class DataJpaUserRepositoryTest extends AbstractRepositoryTest {
         validateRootCause(ConstraintViolationException.class, () -> repository.save(new User(null, "User", "  ", "password", Role.USER)));
         validateRootCause(ConstraintViolationException.class, () -> repository.save(new User(null, "User", "mail@yandex.ru", "  ", Role.USER)));
         validateRootCause(ConstraintViolationException.class, () -> repository.save(new User(null, "User", "mail@yandex.ru", "pass", true, new Date(), Set.of())));
+    }
+
+    @Test
+    void enable() {
+        repository.enable(USER_ID, false);
+        assertFalse(repository.get(USER_ID).isEnabled());
+        repository.enable(USER_ID, true);
+        assertTrue(repository.get(USER_ID).isEnabled());
     }
 }
