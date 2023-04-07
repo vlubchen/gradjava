@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.vlubchen.gradjava.repository.DishRepository;
-import ru.vlubchen.gradjava.repository.UserRepository;
 import ru.vlubchen.gradjava.util.DishUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class RootController {
     private static final Logger log = LoggerFactory.getLogger(RootController.class);
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private DishRepository dishRepository;
@@ -30,9 +26,8 @@ public class RootController {
     }
 
     @GetMapping("/users")
-    public String getUsers(Model model) {
+    public String getUsers() {
         log.info("users");
-        model.addAttribute("users", userRepository.getAll());
         return "users";
     }
 

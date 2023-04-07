@@ -28,6 +28,10 @@ function enable(chkbox, id) {
 $(function () {
     makeEditable(
         $("#datatable").DataTable({
+            "ajax": {
+                "url": userAjaxUrl,
+                "dataSrc": ""
+            },
             "paging": false,
             "info": true,
             "columns": [
@@ -35,24 +39,44 @@ $(function () {
                     "data": "name"
                 },
                 {
-                    "data": "email"
+                    "data": "email",
+                    "render": function (data, type, row) {
+                        if (type === "display") {
+                            return "<a href='mailto:" + data + "'>" + data + "</a>";
+                        }
+                        return data;
+                    }
                 },
                 {
                     "data": "roles"
                 },
                 {
-                    "data": "enabled"
+                    "data": "enabled",
+                    "render": function (data, type, row) {
+                        if (type === "display") {
+                            return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='enable($(this)," + row.id + ");'/>";
+                        }
+                        return data;
+                    }
                 },
                 {
-                    "data": "registered"
+                    "data": "registered",
+                    "render": function (date, type, row) {
+                        if (type === "display") {
+                            return date.replace("T", " ").substring(0, 19);
+                        }
+                        return date;
+                    }
                 },
                 {
-                    "defaultContent": "Edit",
-                    "orderable": false
+                    "orderable": false,
+                    "defaultContent": "",
+                    "render": renderEditBtn
                 },
                 {
+                    "orderable": false,
                     "defaultContent": "Delete",
-                    "orderable": false
+                    "render": renderDeleteBtn
                 }
             ],
             "order": [
