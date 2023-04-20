@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.repository.DishRepository;
-import ru.vlubchen.gradjava.to.DishTo;
-import ru.vlubchen.gradjava.util.DishUtil;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,9 +18,9 @@ public abstract class AbstractDishController {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    public List<DishTo> getAll() {
+    public List<Dish> getAll() {
         log.info("getAll");
-        return DishUtil.getDishesTo(dishRepository.getAll());
+        return dishRepository.getAll();
     }
 
     public Dish get(int id) {
@@ -47,9 +45,8 @@ public abstract class AbstractDishController {
         checkNotFoundWithId(dishRepository.save(dish), dish.getId());
     }
 
-    public List<DishTo> getByDay(@Nullable LocalDate day) {
+    public List<Dish> getByDay(@Nullable LocalDate day) {
         log.info("getByDay {}", day);
-        List<Dish> dishesDateFiltered = dishRepository.getByDay(day);
-        return DishUtil.getFilteredDishesTo(dishesDateFiltered, day);
+        return dishRepository.getByDay(day);
     }
 }

@@ -1,7 +1,6 @@
 package ru.vlubchen.gradjava;
 
 import ru.vlubchen.gradjava.model.Dish;
-import ru.vlubchen.gradjava.to.DishTo;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -15,8 +14,6 @@ import static ru.vlubchen.gradjava.util.RestaurantUtil.restaurants;
 public class DishTestData {
 
     public static final MatcherFactory.Matcher<Dish> DISH_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(Dish.class);
-
-    public static MatcherFactory.Matcher<DishTo> TO_MATCHER = MatcherFactory.usingEqualsComparator(DishTo.class);
     public static final int NOT_FOUND = 10;
     public static final int DISH1_ID = START_SEQ + 6;
 

@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static ru.vlubchen.gradjava.DishTestData.dishes;
-import static ru.vlubchen.gradjava.util.DishUtil.getDishesTo;
 
 public class RootControllerTest extends AbstractControllerTest {
     @Test
@@ -25,6 +24,6 @@ public class RootControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("dishes"))
                 .andExpect(forwardedUrl("/WEB-INF/jsp/dishes.jsp"))
-                .andExpect(model().attribute("dishes", getDishesTo(dishes)));
+                .andExpect(model().attribute("dishes", dishes));
     }
 }

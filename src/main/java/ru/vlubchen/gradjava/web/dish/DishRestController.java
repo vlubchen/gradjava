@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.vlubchen.gradjava.model.Dish;
-import ru.vlubchen.gradjava.to.DishTo;
 
 import java.net.URI;
 import java.time.LocalDate;
@@ -33,7 +32,7 @@ public class DishRestController extends AbstractDishController {
 
     @Override
     @GetMapping
-    public List<DishTo> getAll() {
+    public List<Dish> getAll() {
         return super.getAll();
     }
 
@@ -54,7 +53,7 @@ public class DishRestController extends AbstractDishController {
     }
 
     @GetMapping("/filter")
-    public List<DishTo> getByDay(
+    public List<Dish> getByDay(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate day) {
         return super.getByDay(day);
     }

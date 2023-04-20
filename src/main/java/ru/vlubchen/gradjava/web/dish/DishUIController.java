@@ -8,7 +8,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import ru.vlubchen.gradjava.model.Dish;
 import ru.vlubchen.gradjava.repository.RestaurantRepository;
-import ru.vlubchen.gradjava.to.DishTo;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,12 +16,12 @@ import java.util.List;
 @RequestMapping(value = "/admin/dishes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DishUIController extends AbstractDishController {
 
-    @Autowired(required=false)
+    @Autowired(required = false)
     private RestaurantRepository restaurantRepository;
 
     @Override
     @GetMapping
-    public List<DishTo> getAll() {
+    public List<Dish> getAll() {
         return super.getAll();
     }
 
@@ -40,12 +39,12 @@ public class DishUIController extends AbstractDishController {
                        @RequestParam String name,
                        @RequestParam int price) {
 
-        super.create(new Dish(null, day,  restaurantRepository.getByName(restaurant), name, price));
+        super.create(new Dish(null, day, restaurantRepository.getByName(restaurant), name, price));
     }
 
     @Override
     @GetMapping("/filter")
-    public List<DishTo> getByDay(
+    public List<Dish> getByDay(
             @RequestParam @Nullable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate day) {
         return day != null ? super.getByDay(day) : super.getAll();
     }

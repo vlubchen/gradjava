@@ -51,7 +51,7 @@
             </tr>
             </thead>
             <c:forEach items="${requestScope.dishes}" var="dish">
-                <jsp:useBean id="dish" type="ru.vlubchen.gradjava.to.DishTo"/>
+                <jsp:useBean id="dish" type="ru.vlubchen.gradjava.model.Dish"/>
                 <tr>
                     <td>${dish.day}</td>
                     <td>${dish.restaurant}</td>

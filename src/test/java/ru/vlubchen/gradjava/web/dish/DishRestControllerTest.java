@@ -16,8 +16,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.vlubchen.gradjava.DishTestData.*;
-import static ru.vlubchen.gradjava.util.DishUtil.createTo;
-import static ru.vlubchen.gradjava.util.DishUtil.getDishesTo;
 import static ru.vlubchen.gradjava.util.ValidationUtil.checkNotFoundWithId;
 
 class DishRestControllerTest extends AbstractControllerTest {
@@ -49,7 +47,7 @@ class DishRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(TO_MATCHER.contentJson(getDishesTo(dishes)));
+                .andExpect(DISH_MATCHER.contentJson(dishes));
     }
 
     @Test
@@ -80,6 +78,6 @@ class DishRestControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.get(REST_URL + "filter?day=2023-03-10"))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andExpect(TO_MATCHER.contentJson(createTo(dish16), createTo(dish15), createTo(dish14), createTo(dish13)));
+                .andExpect(DISH_MATCHER.contentJson(dish16, dish15, dish14, dish13));
     }
 }

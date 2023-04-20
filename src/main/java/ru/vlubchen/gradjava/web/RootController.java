@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.vlubchen.gradjava.repository.DishRepository;
-import ru.vlubchen.gradjava.util.DishUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,9 +41,7 @@ public class RootController {
     @GetMapping("/dishes")
     public String getDishes(Model model) {
         log.info("dishes");
-        model.addAttribute("dishes",
-                DishUtil.getDishesTo(dishRepository.getAll()));
+        model.addAttribute("dishes", dishRepository.getAll());
         return "dishes";
     }
 }
-
